@@ -21,7 +21,7 @@ class Involution2D():
         return x
     
     def span_mapping(self, x):
-        return Conv2D(self.kernel_size * self.kernel_size * self.groups, 1, padding = self.padding)(x)
+        return Conv2D(self.kernel_size * self.kernel_size * self.groups, self.kernel_size, padding = self.padding)(x)
     
     
     def __call__(self, x):

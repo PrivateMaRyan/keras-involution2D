@@ -45,9 +45,9 @@ class Involution2D():
         #but it is really [[channel_0[0, 0], channel_1[0, 0]...],
         #                   [channel_0[0, 1], channel_1[0, 1]...]..., stacked in depth  dimention]
         #so the following three lines is to get the wanted patches 
-        out = Reshape((h, w, self.kernel_size * self.kernel_size, K.int_shape(x)[-1]))(out)
+        out = Reshape((h, w, self.kernel_size * self.kernel_size, self.filters))(out)
         out = Permute((1, 2, 4, 3))(out)
-        out = Reshape((h, w, self.kernel_size * self.kernel_size * K.int_shape(x)[-1]), name = "get_right_patch")(out)
+        out = Reshape((h, w, self.kernel_size * self.kernel_size * self.filters), name = "get_right_patch")(out)
         
         out = Reshape((h, w, self.groups, self.filters // self.groups, self.kernel_size * self.kernel_size))(out)
         out = Multiply()([weight, out])
